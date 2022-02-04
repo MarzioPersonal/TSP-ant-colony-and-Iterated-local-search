@@ -4,27 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5c05d10-0c1d-4fb0-a806-9579945a3fed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="d5c05d10-0c1d-4fb0-a806-9579945a3fed" name="Changes" comment="Removed some classes">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/ch130.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/ch130.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/d198.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/d198.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/eil76.opt.tour" beforeDir="false" afterPath="$PROJECT_DIR$/problems/eil76.opt.tour" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/eil76.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/eil76.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/fl1577.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/fl1577.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/kroA100.opt.tour" beforeDir="false" afterPath="$PROJECT_DIR$/problems/kroA100.opt.tour" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/kroA100.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/kroA100.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/lin318.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/lin318.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/pcb442.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/pcb442.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/pr439.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/pr439.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/rat783.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/rat783.tsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI_cup_2021_problems/u1060.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/problems/u1060.tsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seed/seeds.txt" beforeDir="false" afterPath="$PROJECT_DIR$/seed/seeds.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cup/AntColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/AntColony.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cup/BenchIteratedSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cup/TSP.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +167,16 @@
       <workItem from="1643542124162" duration="6810000" />
       <workItem from="1643630709446" duration="35631000" />
       <workItem from="1643882346968" duration="10357000" />
+      <workItem from="1643985619068" duration="627000" />
     </task>
+    <task id="LOCAL-00001" summary="Removed some classes">
+      <created>1643985660081</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1643985660081</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,5 +192,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Removed some classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed some classes" />
   </component>
 </project>
