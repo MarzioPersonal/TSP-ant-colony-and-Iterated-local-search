@@ -166,7 +166,7 @@
       <workItem from="1643542124162" duration="6810000" />
       <workItem from="1643630709446" duration="35631000" />
       <workItem from="1643882346968" duration="10357000" />
-      <workItem from="1643985619068" duration="1176000" />
+      <workItem from="1643985619068" duration="1339000" />
     </task>
     <task id="LOCAL-00001" summary="Removed some classes">
       <created>1643985660081</created>
@@ -189,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643986700603</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="changed gitignore">
+      <created>1643986897551</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1643986897551</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,5 +218,9 @@
     <MESSAGE value="Removed some classes" />
     <MESSAGE value="changed gitignore" />
     <option name="LAST_COMMIT_MESSAGE" value="changed gitignore" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
