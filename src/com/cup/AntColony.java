@@ -36,9 +36,9 @@ public class AntColony {
     }
 
     public static void main(String[] args) {
-        AntColony antColony = new AntColony(18L);
-//        antColony.setupColony("d198.tsp");
-//        antColony.runAntColony();
+        AntColony antColony = new AntColony(-3451564256504210000L);
+        antColony.setupColony("fl1577.tsp");
+        antColony.runAntColony();
     }
 
     public void runAntColony() {
@@ -71,6 +71,7 @@ public class AntColony {
             start += elapsed;
 
         }
+        System.out.println(bestLength);
     }
 
     private ArrayList<Integer> twoOpt(ArrayList<Integer> sol) {
@@ -196,7 +197,7 @@ public class AntColony {
     }
 
     public void setupColony(String title) {
-        Setup setup = new Setup("AI_cup_2021_problems/" + title);
+        Setup setup = new Setup("problems/" + title);
         setup.setupMatrix();
         this.distanceMatrix = setup.getDistanceMatrix();
         this.dimension = setup.getDimension();

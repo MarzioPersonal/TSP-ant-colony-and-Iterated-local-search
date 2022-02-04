@@ -18,7 +18,7 @@ public class IteratedLocalSearch {
     }
 
     private void initializeMatrices(String title) {
-        Setup setup = new Setup("AI_cup_2021_problems/" + title);
+        Setup setup = new Setup("problems/" + title);
         setup.setupMatrix();
         this.dimension = setup.getDimension();
         this.distanceMatrix = setup.getDistanceMatrix();
@@ -56,11 +56,19 @@ public class IteratedLocalSearch {
     }
 
     public static void main(String[] args) {
-        IteratedLocalSearch it = new IteratedLocalSearch(18L);
-        it.execute("ch130.tsp");
+        IteratedLocalSearch it = new IteratedLocalSearch(5906447272222300000L);
+//        it.execute("ch130.tsp");
+//        it.execute("d198.tsp");
+//        it.execute("eil76.tsp");
+//        it.execute("fl1577.tsp");
+//        it.execute("lin318.tsp");
+//        it.execute("pcb442.tsp");
+//        it.execute("pr439.tsp");
+//        it.execute("rat783.tsp");
+        it.execute("u1060.tsp");
     }
 
-    public double execute(String title) {
+    public void execute(String title) {
         initializeMatrices(title);
         generateRandomSolutionWithNearestNeighbour();
         setTemperature();
@@ -71,7 +79,8 @@ public class IteratedLocalSearch {
             var begin = System.currentTimeMillis();
             var B = fourOpt(bestWalk);
             var A = localOpt(B);
-            var delta = getCostPath(A) - getCostPath(bestWalk);
+            var c = getCostPath(bestWalk);
+            var delta = getCostPath(A) - c;
             if (delta <= 0) {
                 bestWalk = A;
             } else if (random.nextDouble(0, 1) < Math.exp(-delta / temperature)) {
@@ -81,7 +90,7 @@ public class IteratedLocalSearch {
             finish = System.currentTimeMillis() - begin;
             start += finish;
         }
-        return getCostPath(bestWalk);
+        System.out.println((getCostPath(bestWalk)));
 
     }
 
