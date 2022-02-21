@@ -36,8 +36,8 @@ public class AntColony {
     }
 
     public static void main(String[] args) {
-        AntColony antColony = new AntColony(-3451564256504210000L);
-        antColony.setupColony("fl1577.tsp");
+        AntColony antColony = new AntColony(45454L);
+        antColony.setupColony("u1060.tsp");
         antColony.runAntColony();
     }
 
@@ -57,6 +57,7 @@ public class AntColony {
             if (len < bestLength) {
                 bestWalk = a;
                 bestLength = len;
+                System.out.println(bestLength);
                 if (bestLength == bestKnown) {
                     break;
                 }
@@ -206,6 +207,7 @@ public class AntColony {
         setInvertedDistanceMatrix();
         setPheromonesLevels();
         bestKnown = setup.bestKnown;
+        System.out.println(bestLength);
     }
 
     public void setInvertedDistanceMatrix() {

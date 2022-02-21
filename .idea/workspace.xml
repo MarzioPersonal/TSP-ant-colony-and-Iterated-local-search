@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5c05d10-0c1d-4fb0-a806-9579945a3fed" name="Changes" comment="changed gitignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cup/AntColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/AntColony.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -53,7 +55,7 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Application.AntColony">
+  <component name="RunManager" selected="Application.sash">
     <configuration name="AntColony" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.cup.AntColony" />
       <module name="TSP_antColony" />
@@ -105,8 +107,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Setup" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cup.Setup" />
+    <configuration name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cup.TSP" />
       <module name="TSP_antColony" />
       <extension name="coverage">
         <pattern>
@@ -118,8 +120,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TSP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cup.TSP" />
+    <configuration name="sash" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.cup.sash" />
       <module name="TSP_antColony" />
       <extension name="coverage">
         <pattern>
@@ -135,16 +137,16 @@
       <item itemvalue="Application.AntColony" />
       <item itemvalue="Application.BenchIteratedSearch" />
       <item itemvalue="Application.IteratedLocalSearch" />
-      <item itemvalue="Application.Setup" />
       <item itemvalue="Application.TSP" />
+      <item itemvalue="Application.sash" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AntColony" />
+        <item itemvalue="Application.sash" />
         <item itemvalue="Application.IteratedLocalSearch" />
+        <item itemvalue="Application.AntColony" />
         <item itemvalue="Application.BenchIteratedSearch" />
         <item itemvalue="Application.TSP" />
-        <item itemvalue="Application.Setup" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +169,9 @@
       <workItem from="1643630709446" duration="35631000" />
       <workItem from="1643882346968" duration="10357000" />
       <workItem from="1643985619068" duration="1566000" />
-      <workItem from="1643987301960" duration="503000" />
+      <workItem from="1643987301960" duration="918000" />
+      <workItem from="1644363637959" duration="1276000" />
+      <workItem from="1645465217513" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="Removed some classes">
       <created>1643985660081</created>
@@ -218,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643987567433</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changed gitignore">
+      <created>1643987867070</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1643987867070</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,19 +240,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="user">
-                    <value>
-                      <list>
-                        <option value="*" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>

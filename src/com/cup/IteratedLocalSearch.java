@@ -57,14 +57,6 @@ public class IteratedLocalSearch {
 
     public static void main(String[] args) {
         IteratedLocalSearch it = new IteratedLocalSearch(5906447272222300000L);
-//        it.execute("ch130.tsp");
-//        it.execute("d198.tsp");
-//        it.execute("eil76.tsp");
-//        it.execute("fl1577.tsp");
-//        it.execute("lin318.tsp");
-//        it.execute("pcb442.tsp");
-//        it.execute("pr439.tsp");
-//        it.execute("rat783.tsp");
         it.execute("u1060.tsp");
     }
 
