@@ -1,7 +1,5 @@
 package com.cup;
 
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -17,7 +15,7 @@ class Setup {
     int dimension;
     int bestKnown;
     final String path;
-    RealMatrix distanceMatrix;
+    double[] distanceMatrix;
     HashMap<Integer, ArrayList<Double>> map = new HashMap<>();
 
     public Setup(String path) {
@@ -91,7 +89,7 @@ class Setup {
         return name;
     }
 
-    public RealMatrix getDistanceMatrix() {
+    public double[] getDistanceMatrix() {
         return distanceMatrix;
     }
 
@@ -115,7 +113,7 @@ class Setup {
 
     private void setDistanceMatrix(int dimension) {
         this.setDimension(dimension);
-        this.distanceMatrix = MatrixUtils.createRealMatrix(new double[dimension][dimension]);
+        this.distanceMatrix = new double[dimension * dimension];
     }
 
     private void setDistanceBetweenCities(int i, int j) {
@@ -125,22 +123,22 @@ class Setup {
                 Math.pow((coords_a.get(0) - coords_b.get(0)), 2) +
                         Math.pow((coords_a.get(1) - coords_b.get(1)), 2)
         ));
-        this.distanceMatrix.setEntry(i, j, dij);
-        this.distanceMatrix.setEntry(j, i, dij);
+        this.distanceMatrix[i* dimension+ j] = dij;
+        this.distanceMatrix[j*dimension + i] =  dij;
 
     }
 
     public void printDistanceMatrix() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                System.out.print(distanceMatrix.getEntry(i, j) + " ");
+                System.out.print(distanceMatrix[i * dimension+ j] + " ");
             }
             System.out.println();
         }
     }
 
 
-
-
-
+    public double getBestKnown() {
+        return bestKnown;
+    }
 }

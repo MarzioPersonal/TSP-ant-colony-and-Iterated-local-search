@@ -5,14 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5c05d10-0c1d-4fb0-a806-9579945a3fed" name="Changes" comment="changed gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cup/AntColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/AntColony.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/cup/Setup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/Setup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -32,30 +40,31 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectId" id="22skciFr3SVIVPba05t1FXzsawz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RunManager" selected="Application.sash">
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.IteratedLocalSearch">
     <configuration name="AntColony" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.cup.AntColony" />
       <module name="TSP_antColony" />
@@ -100,7 +109,7 @@
         <option name="IS_IGNORE_MISSING_FILES" value="false" />
         <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
         <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </extension>
       <method v="2">
@@ -142,8 +151,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.sash" />
         <item itemvalue="Application.IteratedLocalSearch" />
+        <item itemvalue="Application.sash" />
         <item itemvalue="Application.AntColony" />
         <item itemvalue="Application.BenchIteratedSearch" />
         <item itemvalue="Application.TSP" />
@@ -172,6 +181,7 @@
       <workItem from="1643987301960" duration="918000" />
       <workItem from="1644363637959" duration="1276000" />
       <workItem from="1645465217513" duration="6000" />
+      <workItem from="1666024402549" duration="4365000" />
     </task>
     <task id="LOCAL-00001" summary="Removed some classes">
       <created>1643985660081</created>
@@ -260,12 +270,22 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Removed some classes" />
     <MESSAGE value="changed gitignore" />
     <option name="LAST_COMMIT_MESSAGE" value="changed gitignore" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/cup/IteratedLocalSearch.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

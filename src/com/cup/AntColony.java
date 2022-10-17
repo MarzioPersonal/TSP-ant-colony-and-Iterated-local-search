@@ -16,15 +16,15 @@ public class AntColony {
 
     private final Random random;
 
-    public ArrayList<Integer> bestWalk;
+    public int[] bestWalk;
     public double bestLength = 0;
 
-    private ArrayList<Integer> iterationWalk;
+    private int[] iterationWalk;
     private double iterationLength = Integer.MAX_VALUE;
 
-    RealMatrix distanceMatrix;
-    RealMatrix invertedDistanceMatrix;
-    RealMatrix pheromones;
+    double[] distanceMatrix;
+    double[] invertedDistanceMatrix;
+    double[] pheromones;
 
     private double tau0;
     private int dimension;
@@ -63,9 +63,9 @@ public class AntColony {
                 }
             }
             for (int i = 0; i < dimension; i++) {
-                var s = bestWalk.get(i);
-                var e = bestWalk.get(i + 1);
-                this.pheromones.setEntry(s, e, this.pheromones.getEntry(s, e) * (1.0D - alpha) + alpha * (1.0D / bestLength));
+                var s = bestWalk[i];
+                var e = bestWalk[i + 1];
+                this.pheromones[s*dimension + e] = this.pheromones[s*dimension+e] * (1.0D - alpha) + alpha * (1.0D / bestLength);
             }
             var t2 = System.currentTimeMillis();
             elapsed = (t2 - t1);
@@ -75,7 +75,7 @@ public class AntColony {
         System.out.println(bestLength);
     }
 
-    private ArrayList<Integer> twoOpt(ArrayList<Integer> sol) {
+    private int[] twoOpt(int[] sol) {
         int size = dimension + 1;
         double bestGain;
         double imp = 1;
@@ -86,8 +86,10 @@ public class AntColony {
             for (int i = 1; i < size - 2; i++) {
                 bestGain = 0;
                 for (int j = i + 1; j < size - 1; j++) {
-                    var gain = this.distanceMatrix.getEntry(sol.get(i), sol.get(i - 1)) + this.distanceMatrix.getEntry(sol.get(j + 1), sol.get(j)) -
-                            this.distanceMatrix.getEntry(sol.get(i), sol.get(j + 1)) - this.distanceMatrix.getEntry(sol.get(i - 1), sol.get(j));
+                    var gain = this.distanceMatrix[sol[i]*dimension+  sol[i*dimension - 1]] +
+                            this.distanceMatrix[sol[(j + 1)*dimension]+ sol[j*dimension]] -
+                            this.distanceMatrix[sol[i] *dimension+ sol[(j + 1)*dimension]] -
+                            this.distanceMatrix[sol[i - 1]*dimension+ sol[j]];
                     if (gain > bestGain) {
                         bestGain = gain;
                         best_i = i;
@@ -104,19 +106,20 @@ public class AntColony {
     }
 
     private void ant(int initialPosition) {
-        var solution = new ArrayList<Integer>(dimension + 1);
+        var solution = new int[dimension + 1];
         var solutionLength = 0;
-        solution.add(initialPosition);
+        int position =1;
+        solution[0] = initialPosition;
         var pos = initialPosition;
-        while (solution.size() < dimension) {
+        while (position < dimension) {
             var argmax = new double[dimension];
             double sum = 0;
             for (int i = 0; i < dimension; i++) {
-                double x = this.pheromones.getEntry(pos, i) * Math.pow(this.invertedDistanceMatrix.getEntry(pos, i), beta);
+                double x = this.pheromones[pos*dimension+ i] * Math.pow(this.invertedDistanceMatrix[pos*dimension+ i], beta);
                 argmax[i] = x;
                 sum += x;
             }
-            for (Integer i : solution) {
+            for (int i : solution) {
                 var x = argmax[i];
                 sum -= x;
                 argmax[i] = 0.d;
@@ -159,14 +162,14 @@ public class AntColony {
                     break;
                 }
             }
-            solutionLength += this.distanceMatrix.getEntry(pos, next);
-            solution.add(next);
-            this.pheromones.setEntry(pos, next, (1.0D - rho) * this.pheromones.getEntry(pos, next) + rho * tau0);
+            solutionLength += this.distanceMatrix[pos*dimension+ next];
+            solution[position++] =next;
+            this.pheromones[pos*dimension+ next] =  (1.0D - rho) * this.pheromones[pos*dimension+ next] + rho * tau0;
             pos = next;
 
         }
-        solutionLength += this.distanceMatrix.getEntry(initialPosition, solution.get(dimension - 1));
-        solution.add(initialPosition);
+        solutionLength += this.distanceMatrix[initialPosition *dimension+solution[dimension - 1]];
+        solution[dimension] = initialPosition;
         if (solutionLength < iterationLength) {
             iterationWalk = solution;
             iterationLength = solutionLength;
@@ -211,50 +214,57 @@ public class AntColony {
     }
 
     public void setInvertedDistanceMatrix() {
-        double[][] matrix = new double[dimension][dimension];
+        this.invertedDistanceMatrix = new double[dimension*dimension];
         for (int i = 0; i < dimension; i++) {
             for (int j = i; j < dimension; j++) {
-                double d = Math.pow(invertDouble(this.distanceMatrix.getEntry(i, j)), beta);
-                matrix[i][j] = d;
-                matrix[j][i] = d;
+                double d = Math.pow(invertDouble(this.distanceMatrix[i*dimension +j]), beta);
+                invertedDistanceMatrix[i*dimension+j] = d;
+                invertedDistanceMatrix[j*dimension+i] = d;
             }
         }
-        this.invertedDistanceMatrix = MatrixUtils.createRealMatrix(matrix);
     }
 
     public void setPheromonesLevels() {
-        final double[][] matrix = new double[dimension][dimension];
+        this.pheromones =  new double[dimension*dimension];
         for (int i = 0; i < dimension; i++) {
             for (int j = i; j < dimension; j++) {
-                matrix[i][j] = tau0;
-                matrix[j][i] = tau0;
+                pheromones[i*dimension+j] = tau0;
+                pheromones[j*dimension+i] = tau0;
             }
         }
-        this.pheromones = MatrixUtils.createRealMatrix(matrix);
+    }
+
+
+    private boolean contains(int[] array, int value, int pos) {
+        for(int i= 0; i < pos; i++) {
+            if(array[i] == value) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void nearestNeighbour() {
-        bestWalk = new ArrayList<>(dimension + 1);
+        bestWalk = new int[dimension+1];
         int i = random.nextInt(0, dimension);
-        bestWalk.add(i);
+        bestWalk[0] = i;
         int curr = i;
-        while (bestWalk.size() < dimension) {
-            var candidate = this.distanceMatrix.getRow(curr);
+        int pos=1;
+        while (pos < dimension) {
             double minWeight = Integer.MAX_VALUE;
             int next = -1;
             for (int j = 0; j < dimension; j++) {
-                if (minWeight > candidate[j] && !bestWalk.contains(j)) {
-                    minWeight = candidate[j];
+                if (minWeight > this.distanceMatrix[curr*dimension+j] && !contains(bestWalk, j, pos)) {
+                    minWeight = this.distanceMatrix[curr*dimension+j];
                     next = j;
                 }
             }
             bestLength += minWeight;
-            bestWalk.add(next);
+            bestWalk[pos++] = next;
             curr = next;
         }
-        bestLength += this.distanceMatrix.getEntry(i, curr);
-        bestWalk.add(i);
-
+        bestLength += this.distanceMatrix[curr*dimension+i];
+        bestWalk[pos] = i;
     }
 
     public static boolean findDuplicates(ArrayList<Integer> x) {
@@ -271,10 +281,10 @@ public class AntColony {
         return false;
     }
 
-    public double getLength(ArrayList<Integer> list) {
+    public double getLength(int[] list) {
         double tmp = 0;
         for (int i = 0; i < dimension; i++) {
-            tmp += this.distanceMatrix.getEntry(list.get(i), list.get(i + 1));
+            tmp += this.distanceMatrix[list[i]*dimension + list[i+1]];
         }
         return tmp;
     }
@@ -286,23 +296,18 @@ public class AntColony {
             return 1.0d / distance;
     }
 
-    public ArrayList<Integer> swap(ArrayList<Integer> list, int i, int j) {
-        ArrayList<Integer> newList = new ArrayList<>();
-        int size = list.size();
-        for (int k = 0; k <= i - 1; k++) {
-            newList.add(list.get(k));
-        }
+    public int[] swap(int[] list, int i, int j) {
+        int[] newArr = new int[dimension+1];
+        if (i - 1 + 1 >= 0) System.arraycopy(list, 0, newArr, 0, i - 1 + 1);
 
         int invert = 0;
         for (int k = i; k <= j; k++) {
-            newList.add(list.get(j - invert));
+            newArr[k] = list[j - invert];
             invert += 1;
         }
 
-        for (int k = j + 1; k < size; k++) {
-            newList.add(list.get(k));
-        }
-        return newList;
+        if (dimension + 1 - (j + 1) >= 0) System.arraycopy(list, j + 1, newArr, j + 1, dimension + 1 - (j + 1));
+        return newArr;
     }
 
 
