@@ -21,7 +21,7 @@ public class AntColony {
     double[] distanceMatrix;
     double[] invertedDistanceMatrix;
     double[] pheromones;
-
+    double fhf = 0;
     private double tau0;
     private int dimension;
 
