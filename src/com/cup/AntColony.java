@@ -1,10 +1,5 @@
 package com.cup;
 
-
-import org.apache.commons.math3.linear.MatrixUtils;
-
-import org.apache.commons.math3.linear.RealMatrix;
-
 import java.util.*;
 
 public class AntColony {
@@ -18,6 +13,7 @@ public class AntColony {
 
     public int[] bestWalk;
     public double bestLength = 0;
+
 
     private int[] iterationWalk;
     private double iterationLength = Integer.MAX_VALUE;
@@ -36,7 +32,7 @@ public class AntColony {
     }
 
     public static void main(String[] args) {
-        AntColony antColony = new AntColony(45454L);
+        AntColony antColony = new AntColony(12L);
         antColony.setupColony("u1060.tsp");
         antColony.runAntColony();
     }
@@ -57,10 +53,6 @@ public class AntColony {
             if (len < bestLength) {
                 bestWalk = a;
                 bestLength = len;
-                System.out.println(bestLength);
-                if (bestLength == bestKnown) {
-                    break;
-                }
             }
             for (int i = 0; i < dimension; i++) {
                 var s = bestWalk[i];
@@ -72,7 +64,7 @@ public class AntColony {
             start += elapsed;
 
         }
-        System.out.println(bestLength);
+        System.out.println((bestLength - bestKnown) / bestKnown);
     }
 
     private int[] twoOpt(int[] sol) {
@@ -86,9 +78,9 @@ public class AntColony {
             for (int i = 1; i < size - 2; i++) {
                 bestGain = 0;
                 for (int j = i + 1; j < size - 1; j++) {
-                    var gain = this.distanceMatrix[sol[i]*dimension+  sol[i*dimension - 1]] +
-                            this.distanceMatrix[sol[(j + 1)*dimension]+ sol[j*dimension]] -
-                            this.distanceMatrix[sol[i] *dimension+ sol[(j + 1)*dimension]] -
+                    var gain = this.distanceMatrix[sol[i]*dimension+sol[i -1]] +
+                            this.distanceMatrix[sol[j + 1]*dimension+ sol[j]] -
+                            this.distanceMatrix[sol[i] *dimension+ sol[(j + 1)]] -
                             this.distanceMatrix[sol[i - 1]*dimension+ sol[j]];
                     if (gain > bestGain) {
                         bestGain = gain;
@@ -119,10 +111,10 @@ public class AntColony {
                 argmax[i] = x;
                 sum += x;
             }
-            for (int i : solution) {
-                var x = argmax[i];
+            for(int i =0; i < position; i++){
+                var x = argmax[solution[i]];
                 sum -= x;
-                argmax[i] = 0.d;
+                argmax[solution[i]] = 0.d;
             }
             int next = 0;
             double r = random.nextDouble(0, 1);
@@ -148,7 +140,6 @@ public class AntColony {
                     }
                     sumIt += x;
                 }
-
                 try {
                     sumIt -= probMax;
                     if (sumIt <= 0) {
@@ -159,7 +150,7 @@ public class AntColony {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    break;
+                    System.exit(1);
                 }
             }
             solutionLength += this.distanceMatrix[pos*dimension+ next];
@@ -210,7 +201,6 @@ public class AntColony {
         setInvertedDistanceMatrix();
         setPheromonesLevels();
         bestKnown = setup.bestKnown;
-        System.out.println(bestLength);
     }
 
     public void setInvertedDistanceMatrix() {
