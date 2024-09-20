@@ -31,11 +31,8 @@ public class AntColony {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Running Ant colony");
         AntColony antColony = new AntColony(12L);
-        System.out.println("Setting up colony");
         antColony.setupColony("u1060.tsp");
-        System.out.println("Running...");
         antColony.runAntColony();
     }
 
