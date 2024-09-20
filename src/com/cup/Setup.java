@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.lang.Math;
@@ -15,7 +14,7 @@ class Setup {
     int dimension;
     int bestKnown;
     final String path;
-    double[] distanceMatrix;
+    int[] distanceMatrix;
     HashMap<Integer, ArrayList<Double>> map = new HashMap<>();
 
     public Setup(String path) {
@@ -28,7 +27,7 @@ class Setup {
     public static void main(String[] args) {
     }
 
-    public void setupMatrix() {
+    public void setupMatrix() throws IOException {
 //        System.out.println(path);
         try {
             boolean skip = false;
@@ -37,7 +36,7 @@ class Setup {
             String line;
             while (!Objects.equals(line = in.readLine(), "EOF")) {
                 var l = line.split(" ");
-                l = Arrays.stream(l).filter(value -> value.length() != 0).toArray(String[]::new);
+                l = Arrays.stream(l).filter(value -> !value.isEmpty()).toArray(String[]::new);
                 if (!skip) {
 
                     switch (l[0]) {
@@ -51,8 +50,8 @@ class Setup {
                 } else {
                     var index = Integer.parseInt(l[0]) - 1;
                     var list = new ArrayList<Double>();
-                    list.add(convertToInt(l[1]));
-                    list.add(convertToInt(l[2]));
+                    list.add(Double.parseDouble(l[1]));
+                    list.add(Double.parseDouble(l[2]));
                     this.map.put(index, list);
 
                 }
@@ -71,25 +70,16 @@ class Setup {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
 
-    }
-
-    public double convertToInt(String s) {
-        double toRet;
-        try {
-            toRet = Double.parseDouble(s);
-        } catch (Exception e) {
-            toRet = new BigDecimal(s).doubleValue();
-        }
-        return toRet;
     }
 
     public String getName() {
         return name;
     }
 
-    public double[] getDistanceMatrix() {
+    public int[] getDistanceMatrix() {
         return distanceMatrix;
     }
 
@@ -113,19 +103,18 @@ class Setup {
 
     private void setDistanceMatrix(int dimension) {
         this.setDimension(dimension);
-        this.distanceMatrix = new double[dimension * dimension];
+        this.distanceMatrix = new int[dimension * dimension];
     }
 
     private void setDistanceBetweenCities(int i, int j) {
         var coords_a = this.map.get(i);
         var coords_b = this.map.get(j);
-        double dij = Math.round(Math.sqrt(
+        int dij = Math.toIntExact(Math.round(Math.sqrt(
                 Math.pow((coords_a.get(0) - coords_b.get(0)), 2) +
                         Math.pow((coords_a.get(1) - coords_b.get(1)), 2)
-        ));
+        )));
         this.distanceMatrix[i* dimension+ j] = dij;
         this.distanceMatrix[j*dimension + i] =  dij;
-
     }
 
     public void printDistanceMatrix() {
@@ -138,7 +127,7 @@ class Setup {
     }
 
 
-    public double getBestKnown() {
+    public int getBestKnown() {
         return bestKnown;
     }
 }

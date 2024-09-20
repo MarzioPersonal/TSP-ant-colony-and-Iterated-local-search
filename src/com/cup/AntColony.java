@@ -1,5 +1,6 @@
 package com.cup;
 
+import java.io.IOException;
 import java.util.*;
 
 public class AntColony {
@@ -12,16 +13,14 @@ public class AntColony {
     private final Random random;
 
     public int[] bestWalk;
-    public double bestLength = 0;
-
+    public int bestLength = 0;
 
     private int[] iterationWalk;
-    private double iterationLength = Integer.MAX_VALUE;
+    private int iterationLength = Integer.MAX_VALUE;
 
-    double[] distanceMatrix;
+    int[] distanceMatrix;
     double[] invertedDistanceMatrix;
     double[] pheromones;
-    double fhf = 0;
     private double tau0;
     private int dimension;
 
@@ -31,16 +30,19 @@ public class AntColony {
         this.random = new Random(seed);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        System.out.println("Running Ant colony");
         AntColony antColony = new AntColony(12L);
+        System.out.println("Setting up colony");
         antColony.setupColony("u1060.tsp");
+        System.out.println("Running...");
         antColony.runAntColony();
     }
 
     public void runAntColony() {
         var start = System.currentTimeMillis();
         var elapsed = 0L;
-        var end = start + 180000;
+        var end = start + (180*1000);
         while (start + elapsed < end) {
             var t1 = System.currentTimeMillis();
             iterationLength = Integer.MAX_VALUE;
@@ -62,36 +64,39 @@ public class AntColony {
             var t2 = System.currentTimeMillis();
             elapsed = (t2 - t1);
             start += elapsed;
-
         }
-        System.out.println((bestLength - bestKnown) / bestKnown);
+        System.out.println(bestLength);
+        System.out.println(percentageChange(bestLength));
+    }
+
+    private double percentageChange(int x) {
+        double nominator = (x - bestKnown);
+        return nominator / bestKnown * 100.;
     }
 
     private int[] twoOpt(int[] sol) {
         int size = dimension + 1;
-        double bestGain;
-        double imp = 1;
+        int bestGain = 1;
         int best_i = 0;
         int best_j = 0;
-        while (imp != 0) {
-            imp = 0;
+        while (bestGain > 0) {
+            bestGain = 0;
             for (int i = 1; i < size - 2; i++) {
-                bestGain = 0;
                 for (int j = i + 1; j < size - 1; j++) {
-                    var gain = this.distanceMatrix[sol[i]*dimension+sol[i -1]] +
-                            this.distanceMatrix[sol[j + 1]*dimension+ sol[j]] -
-                            this.distanceMatrix[sol[i] *dimension+ sol[(j + 1)]] -
-                            this.distanceMatrix[sol[i - 1]*dimension+ sol[j]];
+                    int gain = this.distanceMatrix[sol[i-1] * dimension + sol[i]] +
+                            this.distanceMatrix[sol[j] * dimension + sol[j + 1]] -
+                            this.distanceMatrix[sol[i-1] * dimension + sol[j]] -
+                            this.distanceMatrix[sol[i] * dimension + sol[j + 1]];
+
                     if (gain > bestGain) {
                         bestGain = gain;
                         best_i = i;
                         best_j = j;
                     }
                 }
-                if (bestGain > 0) {
-                    sol = swap(sol, best_i, best_j);
-                    imp = 1;
-                }
+            }
+            if (bestGain > 0) {
+                sol = swap(sol, best_i, best_j);
             }
         }
         return sol;
@@ -99,10 +104,10 @@ public class AntColony {
 
     private void ant(int initialPosition) {
         var solution = new int[dimension + 1];
-        var solutionLength = 0;
+        int solutionLength = 0;
         int position =1;
         solution[0] = initialPosition;
-        var pos = initialPosition;
+        int pos = initialPosition;
         while (position < dimension) {
             var argmax = new double[dimension];
             double sum = 0;
@@ -191,7 +196,7 @@ public class AntColony {
         throw new Exception();
     }
 
-    public void setupColony(String title) {
+    public void setupColony(String title) throws IOException {
         Setup setup = new Setup("problems/" + title);
         setup.setupMatrix();
         this.distanceMatrix = setup.getDistanceMatrix();
@@ -241,7 +246,7 @@ public class AntColony {
         int curr = i;
         int pos=1;
         while (pos < dimension) {
-            double minWeight = Integer.MAX_VALUE;
+            int minWeight = Integer.MAX_VALUE;
             int next = -1;
             for (int j = 0; j < dimension; j++) {
                 if (minWeight > this.distanceMatrix[curr*dimension+j] && !contains(bestWalk, j, pos)) {
@@ -257,22 +262,8 @@ public class AntColony {
         bestWalk[pos] = i;
     }
 
-    public static boolean findDuplicates(ArrayList<Integer> x) {
-        for (int i = 1; i < x.size() - 1; i++) {
-            for (int j = i + 1; j < x.size() - 1; j++) {
-                if (Objects.equals(x.get(i), x.get(j))) {
-                    System.out.println("idx " + i + " " + j + " : " + x.get(i));
-                    System.out.println(x);
-                    System.out.println("error with size " + x.size());
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public double getLength(int[] list) {
-        double tmp = 0;
+    public int getLength(int[] list) {
+        int tmp = 0;
         for (int i = 0; i < dimension; i++) {
             tmp += this.distanceMatrix[list[i]*dimension + list[i+1]];
         }
@@ -287,18 +278,14 @@ public class AntColony {
     }
 
     public int[] swap(int[] list, int i, int j) {
-        int[] newArr = new int[dimension+1];
-        if (i - 1 + 1 >= 0) System.arraycopy(list, 0, newArr, 0, i - 1 + 1);
-
-        int invert = 0;
-        for (int k = i; k <= j; k++) {
-            newArr[k] = list[j - invert];
-            invert += 1;
+        // Reverse the segment between i and j
+        while (i < j) {
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+            i++;
+            j--;
         }
-
-        if (dimension + 1 - (j + 1) >= 0) System.arraycopy(list, j + 1, newArr, j + 1, dimension + 1 - (j + 1));
-        return newArr;
+        return list;
     }
-
-
 }
