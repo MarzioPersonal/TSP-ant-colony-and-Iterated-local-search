@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5c05d10-0c1d-4fb0-a806-9579945a3fed" name="Changes" comment="changed gitignore">
-      <change beforePath="$PROJECT_DIR$/src/com/cup/AntColony.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cup/AntColony.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +198,7 @@
       <workItem from="1666024402549" duration="6574000" />
       <workItem from="1666802825457" duration="412000" />
       <workItem from="1668617770579" duration="290000" />
-      <workItem from="1726770562988" duration="6658000" />
+      <workItem from="1726770562988" duration="11087000" />
     </task>
     <task id="LOCAL-00001" summary="Removed some classes">
       <created>1643985660081</created>
